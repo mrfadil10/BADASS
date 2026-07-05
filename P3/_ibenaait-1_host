@@ -1,4 +1,2 @@
-auto eth0
-iface eth0 inet static
-    address 20.1.1.1
-    netmask 255.255.255.0
+ip addr add 20.1.1.1/24 dev eth1
+ip link set eth1 up

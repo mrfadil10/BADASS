@@ -1,0 +1,20 @@
+# 1. Setup the physical underlay network
+/sbin/ip link set eth0 up
+/sbin/ip addr add 10.1.1.1/24 dev eth0
+
+# 2. Turn on the interface facing the host
+/sbin/ip link set eth1 up
+
+# 3. Create the Bridge (br0) and plug eth1 into it
+/sbin/ip link add br0 type bridge
+/sbin/ip link set br0 up
+
+/sbin/ip link set eth1 master br0
+
+# 4. Setup STATIC VXLAN 10 pointing directly to Router 2 (10.1.1.2)
+/sbin/ip link add name vxlan10 type vxlan id 10 remote 10.1.1.2 dstport 4789 dev eth0
+/sbin/ip link set vxlan10 master br0
+/sbin/ip link set vxlan10 up
+
+# 5. Force all unknown MAC traffic directly to Router 2
+bridge fdb append 00:00:00:00:00:00 dev vxlan10 dst 10.1.1.2

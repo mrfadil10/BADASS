@@ -1,0 +1,9 @@
+# According to the Part 1 subject constraints:
+# "No IP address should be configured by default."
+
+# This machine runs on our custom FRRouting (FRR) Docker image.
+# Upon startup, the following required daemons are actively running:
+# - zebra (Core routing manager)
+# - bgpd (BGP Daemon)
+# - ospfd (OSPF Daemon)
+# - isisd (IS-IS Engine)

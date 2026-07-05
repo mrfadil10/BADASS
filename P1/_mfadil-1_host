@@ -1,0 +1,6 @@
+# According to the Part 1 subject:
+# "No IP address should be configured by default."
+
+# This machine runs on our custom Alpine Docker image.
+# It has 'busybox' installed to provide basic networking tools.
+# It is kept alive using the command: tail -f /dev/null
